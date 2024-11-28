@@ -29,4 +29,4 @@ jobs:
           az deployment group create `
             --resource-group $resourceGroupName `
             --template-file './anm.bicep' `
-            --parameters acrName='axwaymanishdevops' containerAppName='my-anm-bicep' imageName='anm' managedEnvironmentName=$environmentname transport=tcp targetPort=8090 acrPassword=IiWYpSG6Cb9Xzl1fyBG5X/gCcoLM+eb0ryxz1owI1y+ACRAqR5xL
+            --parameters acrName='axwaymanishdevops' containerAppName='my-anm-bicep' imageName='anm' managedEnvironmentName=$environmentname targetPort=8090 acrPassword=IiWYpSG6Cb9Xzl1fyBG5X/gCcoLM+eb0ryxz1owI1y+ACRAqR5xL
