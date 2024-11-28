@@ -9,7 +9,18 @@ jobs:
 - job: DeployNM
   displayName: 'Deploy Axway anm using Bicep'
   steps:
+    - task: UsePythonVersion@1
+      inputs:
+       versionSpec: '3.x'
+       addToPath: true
 
+    - task: Bash@3
+      inputs:
+       targetType: 'inline'
+        script: |
+          az upgrade --yes
+          az extension add --name containerapp --yes
+          az extension update --name containerapp
     - task: AzureCLI@2
       displayName: 'Deploy anm with Bicep'
       inputs:
