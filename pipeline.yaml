@@ -1,45 +1,31 @@
 trigger:
-- main
-
+  branches:
+    include:
+      - main
 pool:
   name: 'Default'
 
-variables:
-  ACR_NAME: 'axwaymanishdevops'
-  IMAGE_NAME: 'myapp'
+jobs:
+- job: DeployNM
+  displayName: 'Deploy Axway anm using Bicep'
+  steps:
 
-steps:
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'axwaymanishdepops1'
-    scriptType: 'pscore'  # Use PowerShell Core (cross-platform) for Windows or Linux
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      # Set ACR login server
-      $ACR_LOGIN_SERVER = $(az acr show --name $(ACR_NAME) --query "loginServer" --output tsv)
-
-      # Log in to ACR by fetching the credentials 33
-      $ACR_USERNAME = $(az acr credential show --name $(ACR_NAME) --query "username" --output tsv)
-      $ACR_PASSWORD = $(az acr credential show --name $(ACR_NAME) --query "passwords[0].value" --output tsv)
-
-      # Login to Docker with the ACR credentials
-      docker login $ACR_LOGIN_SERVER --username $ACR_USERNAME --password $ACR_PASSWORD
-
-      # Build Docker image (provide the correct Dockerfile path)
-      docker build -t "$ACR_LOGIN_SERVER/anm:latest" '.\my-docker-app'
-
-      # Push Docker image to ACR
-      docker push "$ACR_LOGIN_SERVER/myapp:latest"
-
-      # Deploy the image to Azure Container Apps
-      az containerapp create --name my-anm-app `
-        --resource-group RG-mavishnoi `
-        --environment managedEnvironment-RGmavishnoi-91ac-21march `
-        --image $ACR_LOGIN_SERVER/anm:latest `
-        --env-vars ACCEPT_GENERAL_CONDITIONS=yes `
-        --target-port 8090 `
-        --ingress 'external' `
-        --transport 'tcp' `
-        --registry-server $ACR_LOGIN_SERVER `
-        --cpu 2 `
-        --memory 4Gi
+    - task: AzureCLI@2
+      displayName: 'Deploy anm with Bicep'
+      inputs:
+        azureSubscription: 'axwaymanishdepops1'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          # Define parameters
+          $resourceGroupName = 'RG-mavishnoi'
+          $location = 'westeurope'
+          
+          # Create the resource group if it doesn't exist
+          az group create --name $resourceGroupName --location $location
+          
+          # Deploy the ACR using Bicep
+          az deployment group create `
+            --resource-group $resourceGroupName `
+            --template-file './anm.bicep' `
+            --parameters acrName='axwaymanishdevops' containerAppName='my-anm-bicep' imageName='anm' managedEnvironmentName=managedEnvironment-RGmavishnoi-91ac-21march targetPort=8090 acrPassword=IiWYpSG6Cb9Xzl1fyBG5X/gCcoLM+eb0ryxz1owI1y+ACRAqR5xL
