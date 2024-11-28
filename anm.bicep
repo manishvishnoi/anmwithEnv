@@ -21,6 +21,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       ingress: {
         external: true
         targetPort: targetPort
+        transport: 'tcp'
       }
       secrets: [
         {
