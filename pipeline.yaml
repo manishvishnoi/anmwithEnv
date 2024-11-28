@@ -24,7 +24,7 @@ jobs:
           # Create the resource group if it doesn't exist
           #az group create --name $resourceGroupName --location $location
 
-          az containerapp env create --name $environmentname --resource-group $resourceGroupName --location $location --enable-workload-profiles false -s '/subscriptions/9436480f-c708-4e0f-aba3-3d5af128e84a/resourceGroups/RG-mavishnoi/providers/Microsoft.Network/virtualNetworks/Test321/subnets/Test321'
+          az containerapp env create --name $environmentname --resource-group $resourceGroupName --location $location --enable-workload-profiles false -s '/subscriptions/9436480f-c708-4e0f-aba3-3d5af128e84a/resourceGroups/RG-mavishnoi/providers/Microsoft.Network/virtualNetworks/Test1234/subnets/default'
           # Deploy the ACR using Bicep
           az deployment group create `
             --resource-group $resourceGroupName `
