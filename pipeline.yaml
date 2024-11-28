@@ -20,9 +20,12 @@ jobs:
           # Define parameters
           $resourceGroupName = 'RG-mavishnoi'
           $location = 'northeurope'
+          $environment-name = 'testcontainerappenv'
           
           # Create the resource group if it doesn't exist
           az group create --name $resourceGroupName --location $location
+
+          az containerapp env create --name $environment-name --resource-group $resourceGroupName --location $location
           
           # Deploy the ACR using Bicep
           az deployment group create `
