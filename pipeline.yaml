@@ -10,16 +10,6 @@ jobs:
   displayName: 'Deploy Axway anm using Bicep'
   steps:
     - task: AzureCLI@2
-      inputs:
-       azureSubscription: 'axwaymanishdepops1'
-       scriptType: 'bash'
-       scriptLocation: 'inlineScript'
-       inlineScript: |
-        python --version
-        az upgrade --yes
-        az extension add --name containerapp --yes
-        az extension update --name containerapp
-    - task: AzureCLI@2
       displayName: 'Deploy anm with Bicep'
       inputs:
         azureSubscription: 'axwaymanishdepops1'
