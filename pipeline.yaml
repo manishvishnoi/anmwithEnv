@@ -17,7 +17,7 @@ jobs:
     - task: Bash@3
       inputs:
        targetType: 'inline'
-        script: |
+       script: |
           az upgrade --yes
           az extension add --name containerapp --yes
           az extension update --name containerapp
