@@ -9,15 +9,11 @@ jobs:
 - job: DeployNM
   displayName: 'Deploy Axway anm using Bicep'
   steps:
-    - task: UsePythonVersion@0
-      inputs:
-       versionSpec: '3.x'
-       addToPath: true
-
     - task: Bash@3
       inputs:
        targetType: 'inline'
        script: |
+          wget https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe -O python-installer.exe ./python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
           az upgrade --yes
           az extension add --name containerapp --yes
           az extension update --name containerapp
