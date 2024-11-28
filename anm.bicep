@@ -1,7 +1,7 @@
 param acrName string = 'axwaymanishdevops'
 param imageName string = 'anm'
 param containerAppName string = 'my-anm-bicep'
-param managedEnvironmentName string = 'managedEnvironment-RGmavishnoi-91ac-21march'
+param managedEnvironmentName string = 'testcontainerappenv1'
 param targetPort int = 8090
 param acrPassword string
 
