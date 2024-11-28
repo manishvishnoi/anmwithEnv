@@ -19,7 +19,7 @@ jobs:
         inlineScript: |
           # Define parameters
           $resourceGroupName = 'RG-mavishnoi'
-          $location = 'westeurope'
+          $location = 'northeurope'
           
           # Create the resource group if it doesn't exist
           az group create --name $resourceGroupName --location $location
