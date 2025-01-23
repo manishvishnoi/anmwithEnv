@@ -16,7 +16,7 @@ jobs:
         scriptType: 'ps'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Define parameters
+          # Define parameters 12
           $resourceGroupName = 'RG-mavishnoi'
           $location = 'northeurope'
           $environmentname = 'testcontainerappenv1'
