@@ -25,7 +25,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       }
       secrets: [
         {
-          name: 'acr-password' // Updated to valid secret name
+          name: 'acr-password' // Updated to valid secret name c
           value: acrPassword
         }
       ]
